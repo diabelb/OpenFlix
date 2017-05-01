@@ -1,0 +1,21 @@
+{
+  "name": "OpenFlix",
+  "version": "1.0.0",
+  "description": "Best free opensource movie player.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha --recursive",
+    "start": "node demo.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.14",
+    "mocha": "^3.3.0"
+  },
+  "dependencies": {
+    "sync-request": "^4.0.3"
+  }
+}

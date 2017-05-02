@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> <head>
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"b8caaf00dd27d8ecf8a67c1fc6c626a2",petok:"616783627286398697096bbe7886175221d9e971-1493752741-1800",adblock:1,betok:"29afb43448483c214af8bbb6821966e3976bb56a-1493752741-120",zone:"vshare.io",rocket:"0",apps:{}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=85b614c0f6/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<link rel="stylesheet" type="text/css" href="/static/xxx.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="/static/main.css" media="screen"/>
+<script src="/static/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/flowplayer/flowplayer-3.2.13.min.js"></script>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<script type="text/javascript" src="https://ads.exoclick.com/ad_track.js"></script>
+<title>vShare.io | </title>
+<script>
+			var filename = 'Powidoki.2016.PL.720p.AC3.avi.mp4';
+var ExoLoader = (function () {
+    var version = '2.14';
+
+    var setCookie = function (name, value, minutes_ttl) {
+        var exdate = new Date();
+        exdate.setMinutes(exdate.getMinutes() + minutes_ttl);
+        var c_value = encodeURI(value) + "; expires=" + exdate.toUTCString() + "; path=/";
+        document.cookie = name + "=" + c_value;
+    };
+
+    var URLToArray = function(url) {
+        var request = {};
+        var pairs = url.substring(url.indexOf('?') + 1).split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            if(!pairs[i])
+                continue;
+            var pair = pairs[i].split('=');
+            request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        }
+        return request;
+    };
+
+    var openLink = function (event, dest) {
+        if ( typeof(event) != "undefined" ) {
+            event.returnValue = false;
+            if ( event.preventDefault ) {
+                event.preventDefault();
+            }
+            event.stopPropagation();
+        }
+        var url_parts = dest.split('?', 2);
+        var parameters = URLToArray(url_parts[1]);
+        var f = document.createElement("form");
+        f.setAttribute("action", url_parts[0]);
+        f.setAttribute("method", "post");
+        f.setAttribute("target", "_blank");
+        document.getElementsByTagName("body").item(0).appendChild(f);
+        for (var i in parameters) {
+            var input = document.createElement("input");
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", i);
+            input.setAttribute("value", parameters[i]);
+            f.appendChild(input);
+        }
+        f.submit();
+        document.getElementsByTagName("body").item(0).removeChild(f);
+        return false;
+    };
+
+    var stylesheet = "{ border: 0px solid #000000; width: %width%px; height: %height%px; display: inline-block; background-color: rgba(0, 0, 0, 0); margin: 0px 0px; padding: 0px 0px; }";
+    var ad_types = ['banner', 'popunder'];
+    var zone_params = {};
+    var dom = {};
+    var debug_messages = [];
+    var error_messages = [];
+
+    var addDebugMessage = function (message) {
+        var date = new Date();
+        debug_messages.push(date.toISOString() + ": " + message);
+    };
+    var addErrorMessage = function (message) {
+        var date = new Date();
+        error_messages.push(date.toISOString() + ": " + message);
+        console.error(message);
+    };
+
+    var stringify = function (value) {
+        var reassign_when_finished = false;
+        if (typeof Array.prototype.toJSON !== 'undefined') {
+            reassign_when_finished = true;
+            var array_to_json = Array.prototype.toJSON;
+            delete Array.prototype.toJSON;
+        }
+        var val = JSON.stringify(value);
+        if (reassign_when_finished) {
+            Array.prototype.toJSON = array_to_json;
+        }
+        return val;
+    };
+
+    var randStr = function (length, possibleChars)
+    {
+        var text = "";
+        var possible = possibleChars || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < length; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    };
+
+    var createStyle = function (doc, dom_anchor, style_text)
+    {
+        var class_name = randStr(1,"abcdefghijklmnopqrstuvwxyz") + randStr(7);
+        style_text = "." + class_name + " " + style_text;
+        var style = doc.createElement('style');
+        style.setAttribute('type', 'text/css');
+        style.innerHTML = style_text;
+        dom_anchor.parentNode.insertBefore(style, dom_anchor);
+        return class_name;
+    };
+
+    var loader = {
+        cookie_name: "exo_zones",
+        addZone: function(params) {
+            if (typeof exo99HL3903jjdxtrnLoad != "undefined" && exo99HL3903jjdxtrnLoad) {
+                return false;
+            }
+            if (typeof params != 'object'
+                || typeof params.type == 'undefined'
+                || ad_types.indexOf(params.type) == -1
+            ) {
+                addErrorMessage("addZone() invalid params");
+                return false;
+            }
+            var doc = params.doc || document;
+            var scripts = doc.getElementsByTagName('script');
+            // The current <script> tag where the method is called
+            var here = scripts[ scripts.length - 1 ];
+
+            var type = params.type;
+            delete params.type;
+            if (typeof zone_params[type] == 'undefined') {
+                dom[type] = [];
+                zone_params[type] = [];
+            }
+
+            zone_params[type].push(params);
+
+            if (type == 'banner') {
+                var style_text = stylesheet.replace('%width%', params.width)
+                    .replace('%height%', params.height);
+                var class_name = createStyle(doc, here, style_text);
+
+                var placeholder = doc.createElement('div');
+                placeholder.setAttribute('class', class_name);
+                here.parentNode.insertBefore(placeholder, here);
+                dom[type].push({'placeholder': placeholder, 'doc_reference': doc});
+            }
+
+            addDebugMessage("addZone() " + type + " " + params.idzone + " added");
+            return true;
+        },
+        renderBannerZone: function (id, img_data, dest) {
+            var idzone = zone_params['banner'][id]['idzone'];
+            addDebugMessage("renderBannerZone() #" + id + " called for zone " + idzone);
+            if (typeof dom['banner'][id] == 'undefined'
+                || typeof img_data != 'object'
+                || typeof img_data.img == 'undefined'
+                || typeof img_data.content_type == 'undefined'
+                || typeof dest == 'undefined'
+            ) {
+                addErrorMessage("renderBannerZone() #" + id + " corrupt params for zone " + idzone);
+                return false;
+            }
+            if (
+                typeof dom['banner'][id]["doc_reference"] == 'undefined' ||
+                typeof dom['banner'][id]["doc_reference"].body == 'undefined' ||
+                !dom['banner'][id]["doc_reference"].body.contains(dom['banner'][id]['placeholder'])
+            ) {
+                addErrorMessage("renderBannerZone() #" + id + " dom placeholder is not present for zone " + idzone);
+                return false;
+            }
+            var style_text = "{ background-image: url('data:" + img_data.content_type + ";base64," + img_data.img + "'); background-repeat: no-repeat; cursor: pointer; }";
+            var class_name = createStyle(dom['banner'][id]["doc_reference"], dom['banner'][id]['placeholder'], style_text);
+            var current_class = dom['banner'][id]['placeholder'].getAttribute('class');
+            dom['banner'][id]['placeholder'].setAttribute('class', current_class + " " + class_name);
+            dom['banner'][id]['placeholder'].onclick = (function(dest) {
+                return function(event) {
+                    openLink(event, dest);
+                };
+            })(dest);
+        },
+        renderBannerZones: function (response) {
+            addDebugMessage("renderBannerZones() called");
+            if (typeof response != 'object'
+                || typeof response.zones != 'object'
+                || typeof response.images != 'object'
+            ) {
+                addDebugMessage("renderBannerZones() empty zones or images");
+                return;
+            }
+            for (var i = 0; i < response.zones.length; i++) {
+                if (typeof zone_params['banner'][i] == 'undefined' ||
+                    typeof zone_params['banner'][i]['idzone'] == 'undefined'
+                ) {
+                    addErrorMessage("renderBannerZones() zone info missing");
+                }
+                var idzone = zone_params['banner'][i]['idzone'];
+                if (response.zones[i] == false) {
+                    addDebugMessage("renderBannerZones() nothing to show for zone " + idzone);
+                    continue;
+                }
+                var img_key = response.zones[i].img_key;
+                this.renderBannerZone(i, response.images[img_key], response.zones[i].dest);
+            }
+        },
+        serve: function(params) {
+            if (typeof exo99HL3903jjdxtrnLoad != "undefined" && exo99HL3903jjdxtrnLoad) {
+                addDebugMessage("serve() ad blocker not enabled");
+                return false;
+            }
+            var zones_added = false;
+            for (var type_index = 0; type_index < ad_types.length; type_index++) {
+                if (typeof zone_params[ad_types[type_index]] !== 'undefined' && zone_params[ad_types[type_index]].length > 0) {
+                    zones_added = true;
+                    break;
+                }
+            }
+            if (!zones_added) {
+                addErrorMessage("serve() called but no zones added");
+                return false;
+            }
+            window.exoNoExternalUI38djdkjDDJsio96 = true;
+            addDebugMessage("serve() called");
+            setCookie(this.cookie_name, stringify(zone_params), 5);
+            var loadDataScript = function () {
+                var dataScript = document.createElement("script");
+                dataScript.async = true;
+                dataScript.setAttribute('type', 'text/javascript');
+                dataScript.setAttribute('src', params.script_url);
+                dataScript.onload = function(){
+                    addDebugMessage("serve() hosted script loaded");
+                };
+                document.getElementsByTagName("body").item(0).appendChild(dataScript);
+            };
+            if (!params.force) {
+                if (window.addEventListener) {
+                    window.addEventListener("load", loadDataScript, false);
+                } else if (window.attachEvent) {
+                    window.attachEvent("onload", loadDataScript);
+                } else {
+                    window.onload = loadDataScript;
+                }
+            } else {
+                loadDataScript();
+            }
+            return true;
+        },
+        getDebug: function() {
+            for (var i = 0; i < debug_messages.length; i++) {
+                console.log(debug_messages[i]);
+            }
+        },
+        getVersion: function() {
+            return version;
+        }
+    };
+
+    return loader;
+})();
+			</script>
+</head>
+<body style="background: #222;">
+<script type='text/javascript'>
+function closer() {
+var y = document.getElementById("sendif");
+y.style.visibility = "hidden";
+y.innerHTML = "";
+/*
+$.ajax({
+    url:      "/dsd.php?f="+filename,
+    async:    false,
+    dataType: "json",
+    data:     {},
+    success:  function(status) {
+        if (status == null) {
+        } else if(!status) {
+        } else {
+            window.open(status['link']);
+        }
+    }
+});*/
+}
+</script>
+</head>
+<body>
+<div style="background-color:#333;border:1px dotted #d45500;text-align: center; top: 0px; left: 40%; position: absolute;height:290px; width: 310px;z-index:100;" id="sendif">
+<a href="javascript:closer();" onClick="" class="button orange loginbutton" style="padding: 10px 15px !important;">
+Close
+</a>
+<script type="text/javascript">
+var ad_idzone = "2317287",
+	 ad_width = "300",
+	 ad_height = "250";
+
+	 ExoLoader.addZone({"type": "banner", "width":"300", "height":"250", "idzone":"2317287"});
+</script>
+<script type="text/javascript" src="https://ads.exdynsrv.com/ads.js"></script>
+</div>
+<div class="player-bar" style="width:600px;">
+<span style="display: inline-block;width:410px;">
+<a href="//vshare.io/d/49869bd" target="_blank">Powidoki.2016.PL.720p.AC3.avi</a>
+</span>
+<a href="/affiliate/" id="" class="small button green reverse loginbutton" style="color: #000;" target="_blank">Earn money!</a>
+<a class="small button green loginbutton" href="//vshare.io" target="_blank" style="margin-top:1px; color: #000;">Upload files</a>
+</div>
+<link href="/js/player.css?3" rel="stylesheet">
+<script src="/js/player_ie8.js?3"></script>
+<style>video::-internal-media-controls-download-button{display:none;}video::-webkit-media-controls-enclosure{overflow:hidden;}video::-webkit-media-controls-panel{width:calc(100% + 30px);}</style>
+<video id="my-video" class="video-js" controls preload="metadata" poster="//vshare.io/thumbs/4/9/49869bd.jpg" width="600" height="370" data-setup='{}'>
+<source src="http://s22.vshare.io/s,110-1000-4-0/190462/341088/184778/ff-7035d2fa7cf7c6da46495e4cfded778c,590a23c5,49869bd_480.mp4" type="video/mp4" label="480p" res="480"><source src="http://s22.vshare.io/s,110-1000-4-0/190462/341088/184778/ff-7035d2fa7cf7c6da46495e4cfded778c,590a23c5,49869bd_360.mp4" type="video/mp4" label="360p" res="360"><source src="http://s22.vshare.io/s,110-1000-4-0/190462/341088/184778/ff-7035d2fa7cf7c6da46495e4cfded778c,590a23c5,49869bd_240.mp4" type="video/mp4" label="240p" res="240"> <p class="vjs-no-js">
+To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+</p>
+</video>
+<script src="/js/player.js?3"></script>
+<script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
+<script>
+  var player = videojs('my-video');
+  player.videoJsResolutionSwitcher({default: 480});
+	  player.hotkeys({
+			volumeStep: 0.1,
+			seekStep: 30,
+			alwaysCaptureHotkeys: true
+		});
+  player.contextmenu();
+  player.on('resolutionchange', function(){
+        console.info('Source changed to %s', player.src())
+  });
+</script>
+<script>
+  ExoLoader.serve({"script_url":"/watch_video.php"});
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51390155-2', 'vshare.io');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

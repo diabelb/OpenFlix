@@ -6,13 +6,15 @@
 import {Host} from "./Host";
 import {SyncRequestUtil} from "../utils/SyncRequestUtil";
 import {OpenLoad} from "./providers/OpenLoad";
+import {VShare} from "./providers/VShare";
 
 
 export class HostFactory {
     private requestUtil;
 
     public static readonly PROVIDERS = [
-        [/http[s]*:\/\/openload.co[^']+/, OpenLoad]
+        [/http[s]*:\/\/openload.co[^'"]+/, OpenLoad],
+        [/http[s]*:\/\/vshare.io[^'"]+/, VShare]
     ];
     constructor(requestUtil?: SyncRequestUtil) {
         if (requestUtil) {

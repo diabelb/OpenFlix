@@ -5,6 +5,7 @@ import * as cheerio from "cheerio";
  */
 
 export class VShare extends Host{
+    static URL_REG_EXP = /http[s]*:\/\/vshare.io[^'"]+/;
     private htmlContent: string;
 
     public setUrl(url: string) {

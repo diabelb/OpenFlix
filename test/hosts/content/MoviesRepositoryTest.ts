@@ -17,8 +17,8 @@ describe('Content/MoviesRepository', function () {
     });
 });
 
-let mockedSearchData = fs.readFileSync(__dirname + "/providers/mockedSearchRequest", "UTF-8");
-let mockedSingleMovieData = fs.readFileSync(__dirname + "/providers/mockedSingleMovieRequest", "UTF-8");
+let mockedSearchData = fs.readFileSync(__dirname + "/providers/EKinoTv/mockedSearchRequest", "UTF-8");
+let mockedSingleMovieData = fs.readFileSync(__dirname + "/providers/EKinoTv/mockedSingleMovieRequest", "UTF-8");
 let requestMock = {
     request: (method, url, options) => {
         if (method == "POST" &&

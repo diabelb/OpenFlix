@@ -47,7 +47,6 @@ export class EKinoTv extends Provider {
                 url: url
             };
         });
-
         return moviesList;
     }
 

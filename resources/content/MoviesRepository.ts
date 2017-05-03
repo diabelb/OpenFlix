@@ -1,13 +1,14 @@
 import {EKinoTv} from "./providers/EKinoTv";
 import {Provider} from "./Provider";
 import {SyncRequestUtil} from "../utils/SyncRequestUtil";
+import {FilmyTo} from "./providers/FilmyTo";
 
 /**
  * Created by Dawid on 02.05.2017.
  */
 
 export class MoviesRepository {
-    private contentProviders = [EKinoTv];
+    private contentProviders = [EKinoTv, FilmyTo];
     private requestUtil: SyncRequestUtil;
 
     constructor(requestUtil?: SyncRequestUtil) {

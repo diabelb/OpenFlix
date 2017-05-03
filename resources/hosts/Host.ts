@@ -9,6 +9,7 @@ export abstract class Host {
 
     protected requestUtil: SyncRequestUtil;
     protected url: string;
+    static URL_REG_EXP;
 
     constructor(requestUtil: SyncRequestUtil) {
         this.url = "";

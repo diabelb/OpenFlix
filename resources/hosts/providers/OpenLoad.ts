@@ -14,6 +14,7 @@ export class OpenLoad extends Host {
     private static readonly DEC_SCRIPT = /type="text\/javascript">(.[\s\S]+?)<\/script>/;
     private static readonly NEEDED_JS_FILTER = /^(.+?)}\);\s*\$\("#videooverlay/;
     private htmlContent: string;
+    static URL_REG_EXP = /http[s]*:\/\/openload.co[^'"&]+/;
 
     public setUrl(url: string) {
         this.htmlContent = null;

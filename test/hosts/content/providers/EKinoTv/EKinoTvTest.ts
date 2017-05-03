@@ -5,7 +5,7 @@
 
 import * as assert from "assert";
 import * as fs from "fs";
-import {EKinoTv} from "../../../../resources/content/providers/EKinoTv";
+import {EKinoTv} from "../../../../../resources/content/providers/EKinoTv";
 
 describe('Content/Providers/EKinoTv', function () {
     describe('setQuery(), getQuery()', () => {

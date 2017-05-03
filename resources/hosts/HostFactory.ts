@@ -13,8 +13,8 @@ export class HostFactory {
     private requestUtil;
 
     public static readonly PROVIDERS = [
-        [/http[s]*:\/\/openload.co[^'"]+/, OpenLoad],
-        [/http[s]*:\/\/vshare.io[^'"]+/, VShare]
+        [OpenLoad.URL_REG_EXP, OpenLoad],
+        [VShare.URL_REG_EXP, VShare]
     ];
     constructor(requestUtil?: SyncRequestUtil) {
         if (requestUtil) {

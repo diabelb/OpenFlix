@@ -6,8 +6,10 @@ import {HostFactory} from "./resources/hosts/HostFactory";
 import {MoviesRepository} from "./resources/content/MoviesRepository";
 import {SyncRequestUtil} from "./resources/utils/SyncRequestUtil";
 import {FilmyTo} from "./resources/content/providers/FilmyTo";
+import {RequestUtil} from "./resources/utils/RequestUtil";
+import {EKinoTvAsync} from "./resources/content/providers/EKinoTvAsync";
 
-//let request = new SyncRequestUtil();
+let request = new RequestUtil();
 //let filmyTo = new FilmyTo(request);
 //filmyTo.getMovieHtml("http://filmy.to/film/Harry_Potter_i_Ksiaze_Polkrwi-2009,531");
 
@@ -21,6 +23,14 @@ import {FilmyTo} from "./resources/content/providers/FilmyTo";
 //console.log(mediaLink);
 
 //let request = new SyncRequestUtil();
-let content = new MoviesRepository();
-let movies = content.search("harry potter");
-console.log(movies);
+//let content = new MoviesRepository();
+///let movies = content.search("harry potter");
+//console.log(movies);
+
+let eKino = new EKinoTvAsync(request);
+eKino.setQuery("harry potter");
+eKino.getMoviesListItem(data => {
+    console.log(data);
+});
+
+console.log("tttttttttttttttttttttt");

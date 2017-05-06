@@ -1,56 +1,79 @@
-/**
- * Created by Dawid on 02.05.2017.
- */
-
-import {SyncRequestUtil} from "../../utils/SyncRequestUtil";
+import {RequestUtil} from "../../utils/RequestUtil";
 import * as cheerio from "cheerio";
 import {HostFactory} from "../../hosts/HostFactory";
-import {Provider} from "../Provider";
 
-export class EKinoTv extends Provider {
+/**
+ * Created by dawid on 04.05.17.
+ */
+
+export class EKinoTvAsync {
     private query: string;
+    protected requestUtil: RequestUtil;
 
-    constructor(requestUtil: SyncRequestUtil) {
-        super(requestUtil);
-        this.query = "";
-    }
-
-    public getSearchHtml() {
-        let  data = "search_field="+this.getQuery();
-        let res =  this.requestUtil.request('POST', 'http://ekino-tv.pl/search', {
-            body: data,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
-        });
-        return res.body.toString();
-    }
-
-    public getQuery(): string {
-        return this.query;
+    constructor(requestUtil) {
+        this.requestUtil = requestUtil;
     }
 
     public setQuery(query: string) {
         this.query = query;
     }
 
-    public getMoviesListItem() {
-        let htmlCode = this.getSearchHtml();
-        let $ = cheerio.load(htmlCode);
-
-        let moviesList = [];
-        $(".movies-list-item").each((i, item) => {
-            let title = $(item).find(".title a").first().text();
-            let url = $(item).find("a.blue").attr("href");
-            moviesList[i] = {
-                title: title,
-                url: url
-            };
-        });
-        return moviesList;
+    public getQuery() {
+        return this.query;
     }
 
-    getMovieProviderLinks(movieHtml: string) {
+    public getSearchHtml(callback: (data: string) => void) {
+        let query = "search_field=" + this.query;
+        this.requestUtil.request({
+            method: 'POST',
+            url: 'http://ekino-tv.pl/search',
+            body: query,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }, (error, response, body) => {
+            if (error) {
+                console.log("Wyszukiwanie na Ekino.pl nie powiodło się. Problem z połączeniem.")
+                callback("");
+            }
+            else {
+                callback(body.toString());
+            }
+        });
+    }
+
+    public getMoviesListArray(callback: (data) => any) {
+        this.getSearchHtml(htmlCode => {
+            let $ = cheerio.load(htmlCode);
+            let moviesList = [];
+            $(".movies-list-item").each((i, item) => {
+                let title = $(item).find(".title a").first().text();
+                let url = $(item).find("a.blue").attr("href");
+                moviesList[i] = {
+                    title: title,
+                    url: url
+                };
+            });
+            callback(moviesList);
+        });
+    }
+
+    public getMovieHtml(url: string, callback: (movieHtml) => any) {
+        this.requestUtil.request({
+            method: 'GET',
+            url: url,
+        }, (error, response, body) => {
+            if (error) {
+                console.log("Połączenie z adresem "+ url + " nie powiodło się. Problem z połączeniem.")
+                callback("");
+            }
+            else {
+                callback(body.toString());
+            }
+        });
+    }
+
+    public getMovieHostLinks(movieHtml: string) {
         let links = [];
         for (let item of HostFactory.PROVIDERS) {
             let providerRegExp = item[0];
@@ -63,26 +86,31 @@ export class EKinoTv extends Provider {
         return links;
     }
 
-    public getMovieHtml(url: string) {
-        let res =  this.requestUtil.request('GET', url, {});
-        return res.body.toString();
+    public getMoviesWithHostLinks(callback: (links) => any) {
+        this.getMoviesListArray(moviesList => {
+            this.processMoviesList(moviesList, callback);
+        });
     }
 
-    getMoviesWithProviderLinks() {
-        let moviesList = this.getMoviesListItem();
-
-        let result = [];
+    private processMoviesList(moviesList, callback) {
+        let total = moviesList.length;
+        let left = moviesList.length;
         for (let movie of moviesList) {
-            let movieHtml = this.getMovieHtml("http://ekino-tv.pl"+movie.url);
-            let movieProviderLinks = this.getMovieProviderLinks(movieHtml);
-            if (movieProviderLinks[0]) {
-
-                result.push({
-                    title:  movie.title,
-                    providerLinks: movieProviderLinks
-                });
-            }
+            this.getMovieHtml("http://ekino-tv.pl"+movie.url, movieHtml => {
+                this.processMovie(movieHtml, movie.title, total, --left, callback);
+            });
         }
-        return result;
+    }
+
+    private processMovie(movieHtml, title, total, left, callback) {
+        let movieHostLinks = this.getMovieHostLinks(movieHtml);
+        if (movieHostLinks[0]) {
+            callback({
+                title:  title,
+                url: movieHostLinks,
+                total: total,
+                left: left
+            });
+        }
     }
 }

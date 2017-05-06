@@ -2,7 +2,7 @@
   "name": "OpenFlix",
   "version": "1.0.0",
   "description": "Best free opensource movie player.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "postinstall": "tsc",
     "test": "node ./node_modules/mocha/bin/mocha --recursive",
@@ -15,10 +15,14 @@
     "@types/cheerio": "^0.22.1",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.14",
+    "electron": "^1.6.6",
     "mocha": "^3.3.0"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "cheerio": "^0.22.0",
+    "jquery": "^3.2.1",
+    "owl.carousel": "^2.2.0",
     "request": "^2.81.0",
     "request-cookies": "^1.1.0",
     "sync-request": "^4.0.3"

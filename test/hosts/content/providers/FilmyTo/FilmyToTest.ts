@@ -5,7 +5,7 @@
 
 import * as assert from "assert";
 import * as fs from "fs";
-import {FilmyTo} from "../../../../../../resources/content/providers/FilmyTo";
+import {FilmyTo} from "../../../../../resources/content/providers/FilmyTo";
 
 describe('Content/Providers/FilmyTo', function () {
     describe('setQuery(), getQuery()', () => {
@@ -26,11 +26,11 @@ describe('Content/Providers/FilmyTo', function () {
         });
     });
 
-    describe('getMoviesListItem()', () => {
+    describe('getMoviesListArray()', () => {
         it('Filter all movies-list-item from html', () => {
             let filmyToProvider = new FilmyTo(requestMock);
             filmyToProvider.setQuery("Hary Potter");
-            let moviesList = filmyToProvider.getMoviesListItem();
+            let moviesList = filmyToProvider.getMoviesListArray();
             assert.equal(moviesList.length, 9);
         })
     });

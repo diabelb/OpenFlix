@@ -25,7 +25,7 @@ export class FilmyTo extends Provider {
     }
 
     getMoviesWithProviderLinks() {
-        let moviesList = this.getMoviesListItem();
+        let moviesList = this.getMoviesListArray();
 
         let result = [];
         for (let movie of moviesList) {
@@ -51,7 +51,7 @@ export class FilmyTo extends Provider {
         return res.body.toString();
     }
 
-    public getMoviesListItem() {
+    public getMoviesListArray() {
         let htmlCode = this.getSearchHtml();
         let $ = cheerio.load(htmlCode);
 

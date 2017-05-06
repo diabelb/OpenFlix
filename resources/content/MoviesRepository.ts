@@ -1,4 +1,3 @@
-import {EKinoTv} from "./providers/EKinoTv";
 import {Provider} from "./Provider";
 import {SyncRequestUtil} from "../utils/SyncRequestUtil";
 import {FilmyTo} from "./providers/FilmyTo";
@@ -8,7 +7,7 @@ import {FilmyTo} from "./providers/FilmyTo";
  */
 
 export class MoviesRepository {
-    private contentProviders = [EKinoTv, FilmyTo];
+    private contentProviders = [FilmyTo];
     private requestUtil: SyncRequestUtil;
 
     constructor(requestUtil?: SyncRequestUtil) {

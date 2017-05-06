@@ -7,7 +7,7 @@ import {MoviesRepository} from "./resources/content/MoviesRepository";
 import {SyncRequestUtil} from "./resources/utils/SyncRequestUtil";
 import {FilmyTo} from "./resources/content/providers/FilmyTo";
 import {RequestUtil} from "./resources/utils/RequestUtil";
-import {EKinoTvAsync} from "./resources/content/providers/EKinoTvAsync";
+import {EKinoTvAsync} from "./resources/content/providers/EKinoTv";
 
 let request = new RequestUtil();
 //let filmyTo = new FilmyTo(request);
@@ -29,8 +29,7 @@ let request = new RequestUtil();
 
 let eKino = new EKinoTvAsync(request);
 eKino.setQuery("harry potter");
-eKino.getMoviesListItem(data => {
+
+eKino.getMoviesWithHostLinks(data => {
     console.log(data);
 });
-
-console.log("tttttttttttttttttttttt");

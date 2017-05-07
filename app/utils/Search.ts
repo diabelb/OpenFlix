@@ -10,6 +10,7 @@ import {Carousel} from "./Carousel";
 
 export class Search {
     static init() {
+        $(".search-input").focus();
         $(".search-input").on("change", function (e) {
             let searchMovie = $(this).val();
             let request = new RequestUtil();
@@ -18,17 +19,22 @@ export class Search {
             eKino.setQuery(searchMovie);
             Carousel.hide();
             let temp = '';
+            $("#bottom").text("Wyszukuję  -  "+searchMovie+"...");
             eKino.getMoviesData(moviesData => {
-                if (moviesData.imgUrl == '') {
-                    return;
+                if (moviesData.imgUrl != '' && moviesData.url != '') {
+                    temp += '<div class="poster" title="'+moviesData.title+'" url="'+moviesData.url+'"><img src="' + moviesData.imgUrl + '"/><span class="glyphicon glyphicon-play-circle play-icon"></span></div>';
                 }
-                temp += '<div class="poster" title="'+moviesData.title+'" url="'+moviesData.url+'"><img src="' + moviesData.imgUrl + '"/><span class="glyphicon glyphicon-play-circle play-icon"></span></div>';
-                if (moviesData.left == 0) {
+                console.log("TEMP:")
+                console.log("temp: "+temp);
+                if (moviesData.left == 0 && (moviesData.total == 0 || temp == '')) {
+                    $("#bottom").text("Gotowe  -  nie znaleziono");
+                }
+                else if (moviesData.left == 0 && moviesData.total > 0) {
+                    $("#bottom").text("Gotowe");
                     Carousel.replace(temp);
                     Carousel.show();
-
-
                 }
+
             });
         });
     }

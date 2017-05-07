@@ -13,7 +13,7 @@ function createMainWindow() {
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 
     // Open the DevTools.
-   // mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
@@ -22,7 +22,7 @@ function createMainWindow() {
 
 function createMovieWindow() {
     let movieWindow;
-    movieWindow = new BrowserWindow({width: 834, height: 420, frame: false, resizable: false, show: false});
+    movieWindow = new BrowserWindow({width: 834, height: 480, frame: false, resizable: false, show: false});
     movieWindow.setResizable(false);
     movieWindow.loadURL(`file://${__dirname}/app/moviePlayer/moviePlayer.html`);
 

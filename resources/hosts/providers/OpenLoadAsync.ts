@@ -1,20 +1,26 @@
+import {SyncRequestUtil} from "../../utils/SyncRequestUtil";
+import {RequestUtil} from "../../utils/RequestUtil";
+import {AADecoder} from "../../utils/AADecoder";
+import * as vm from "vm";
+
 /**
- * Decodes text encoded with AAEncoder
- * @author Dawid Boruta
- * @author diabelb@gmail.com
+ * Created by Dawid on 07.05.2017.
  */
 
-import * as vm from "vm";
-import {AADecoder} from "../../utils/AADecoder";
-import {Host} from "../Host";
-
-export class OpenLoad extends Host {
+export class OpenLoadAsync {
     private static readonly TAB_PATTERN = /<span id="([^"]+)">([^<>]+)<\/span>/g;
     private static readonly ENC_SCRIPT = /<script src="\/assets\/js\/video-js\/video\.js\.ol\.js"(.+)[\s\S]*/;
     private static readonly DEC_SCRIPT = /type="text\/javascript">(.[\s\S]+?)<\/script>/;
     private static readonly NEEDED_JS_FILTER = /^(.+?)}\);\s*\$\("#videooverlay/;
+    private static readonly URL_REG_EXP = /http[s]*:\/\/openload.co[^'"&]+/;
     private htmlContent: string;
-    static URL_REG_EXP = /http[s]*:\/\/openload.co[^'"&]+/;
+    protected requestUtil: RequestUtil;
+    protected url: string;
+
+    constructor(requestUtil: RequestUtil) {
+        this.url = "";
+        this.requestUtil = requestUtil;
+    }
 
     public setUrl(url: string) {
         this.htmlContent = null;
@@ -25,13 +31,25 @@ export class OpenLoad extends Host {
         return this.url;
     }
 
-    public getMediaLink(): string {
-        let encryptedHtml = this.getEncryptedHtml();
-        let decodedHtml = OpenLoad.decodeHtml(encryptedHtml);
-        let encryptedUrlToFile = this.getEncryptedUrlToFile();
-        let decodedUrlToFile = this.decodeUrlToFIle(decodedHtml, encryptedUrlToFile);
+    public getMediaLink(callback: (decodedUrl)=>any) {
+        this.getHtml(htmlCode => {
+            if (htmlCode != "") {
+                let encryptedHtml = this.getEncryptedHtml(htmlCode);
+                if (encryptedHtml != "") {
+                    let decodedHtml = OpenLoadAsync.decodeHtml(encryptedHtml);
+                    let encryptedUrlToFile = this.getEncryptedUrlToFile();
+                    let decodedUrlToFile = this.decodeUrlToFIle(decodedHtml, encryptedUrlToFile);
+                    callback('https://openload.co/stream/'+decodedUrlToFile);
+                }
+                else {
+                    callback("");
+                }
+            }
+            else {
+                callback("");
+            }
 
-        return "https://openload.co/stream/"+decodedUrlToFile;
+        });
     }
 
     /**
@@ -40,21 +58,27 @@ export class OpenLoad extends Host {
      * @return {string}
      */
     private getCleanedJavascriptCode(decryptedHtml: string):string {
-        let jsCode = OpenLoad.getJsCode(decryptedHtml);
-        jsCode = OpenLoad.ASCIIDecode(jsCode);
-        jsCode = OpenLoad.filterNeededJS(jsCode);
+        let jsCode = OpenLoadAsync.getJsCode(decryptedHtml);
+        jsCode = OpenLoadAsync.ASCIIDecode(jsCode);
+        jsCode = OpenLoadAsync.filterNeededJS(jsCode);
         jsCode = this.hackJS(jsCode);
 
         return jsCode;
     }
 
-    /**
-     * Returns html code of requested url
-     * @return {string}
-     */
-    private getHtml(): string {
-        let res = this.requestUtil.request('GET', this.getUrl(), {});
-        return res.body.toString("UTF-8");
+    public getHtml(callback: (htmlCode)=>any) {
+        this.requestUtil.request({
+            method: 'GET',
+            url: this.getUrl(),
+        }, (error, response, body) => {
+            if (error) {
+                console.log("Połączenie z adresem " + this.getUrl() + " nie powiodło się. Problem z połączeniem.")
+                callback("");
+            }
+            else {
+                callback(body.toString());
+            }
+        });
     }
 
     /**
@@ -62,14 +86,15 @@ export class OpenLoad extends Host {
      * @throws Error
      * @return {string}
      */
-    private getEncryptedHtml(): string {
-        this.htmlContent = this.getHtml();
-        let result = this.htmlContent.match(OpenLoad.ENC_SCRIPT);
+    private getEncryptedHtml(htmlCode: string): string {
+        this.htmlContent = htmlCode;
+        let result = this.htmlContent.match(OpenLoadAsync.ENC_SCRIPT);
         if (result) {
             return result[0];
         }
         else {
-            throw new Error("Encrypted HTML does not exists!");
+            console.log("Encrypted HTML does not exists! "+ this.getUrl());
+            return "";
         }
 
     }
@@ -81,7 +106,7 @@ export class OpenLoad extends Host {
     private getEncryptedUrlToFile(): string {
         let temp;
         let codedUrl = '';
-        while (temp = OpenLoad.TAB_PATTERN.exec(this.htmlContent)) {
+        while (temp = OpenLoadAsync.TAB_PATTERN.exec(this.htmlContent)) {
             if ((temp[2]).length > 30) {
                 codedUrl = temp[2];
             }
@@ -214,9 +239,9 @@ export class OpenLoad extends Host {
      */
     private static decodeHtml(encryptedHtml: string) {
         for (let i = 0; i <= 4; i++) {
-            encryptedHtml = OpenLoad.CheckCpacker(encryptedHtml);
-            encryptedHtml = OpenLoad.CheckJJDecoder(encryptedHtml);
-            encryptedHtml = OpenLoad.CheckAADecoder(encryptedHtml);
+            encryptedHtml = OpenLoadAsync.CheckCpacker(encryptedHtml);
+            encryptedHtml = OpenLoadAsync.CheckJJDecoder(encryptedHtml);
+            encryptedHtml = OpenLoadAsync.CheckAADecoder(encryptedHtml);
         }
         return encryptedHtml;
     }
@@ -227,7 +252,7 @@ export class OpenLoad extends Host {
      * @return {string}
      */
     private static getJsCode(decryptedHtml: string): string {
-        let result = decryptedHtml.match(OpenLoad.DEC_SCRIPT);
+        let result = decryptedHtml.match(OpenLoadAsync.DEC_SCRIPT);
         if (result) {
             decryptedHtml = result[1];
         }
@@ -240,7 +265,7 @@ export class OpenLoad extends Host {
      * @return {string}
      */
     private static filterNeededJS(jsCode: string): string {
-        let result = jsCode.match(OpenLoad.NEEDED_JS_FILTER);
+        let result = jsCode.match(OpenLoadAsync.NEEDED_JS_FILTER);
         if (result) {
             return result[1];
         }

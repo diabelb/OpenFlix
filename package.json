@@ -25,6 +25,7 @@
     "owl.carousel": "^2.2.0",
     "request": "^2.81.0",
     "request-cookies": "^1.1.0",
-    "sync-request": "^4.0.3"
+    "sync-request": "^4.0.3",
+    "video.js": "^5.19.2"
   }
 }

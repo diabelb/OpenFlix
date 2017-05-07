@@ -2,6 +2,7 @@ import {RequestUtil} from "../../utils/RequestUtil";
 import * as cheerio from "cheerio";
 import {HostFactory} from "../../hosts/HostFactory";
 import {FilmWeb} from "../../content/FilmWeb";
+import {OpenLoadAsync} from "../../hosts/providers/OpenLoadAsync";
 
 /**
  * Created by dawid on 04.05.17.
@@ -98,6 +99,9 @@ export class EKinoTv {
     private processMoviesList(moviesList, callback) {
         let total = moviesList.length;
         let left = moviesList.length;
+        if (moviesList.length == 0) {
+            this.processMovie("", "", 0, 0, callback);
+        }
         for (let movie of moviesList) {
             this.getMovieHtml("http://ekino-tv.pl" + movie.url, movieHtml => {
                 this.processMovie(movieHtml, movie.title, total, --left, callback);
@@ -117,19 +121,45 @@ export class EKinoTv {
 
     public getMoviesData(callback: (moviesData) => any) {
         this.getMoviesWithHostLinks(links => {
-            this.contentProvider.setQuery(links.title);
+            let jobs = 2;
+            let data = {
+                title: null,
+                imgUrl: null,
+                url: links.url,
+                total: links.total,
+                left: links.left,
+            };
+            this.contentProvider.setQuery(this.clearTitle(links.title));
             this.contentProvider.getMovieData(movieData => {
+                data.title = movieData.title;
+                data.imgUrl = movieData.imgUrl;
+                if (--jobs == 0) {
+                    callback(data);
+                }
+            });
 
-                callback({
-                    title: movieData.title,
-                    url: links.url,
-                    imgUrl: movieData.imgUrl,
-                    total: links.total,
-                    left: links.left,
-
-                });
+            let openLoadProvider = new OpenLoadAsync(new RequestUtil());
+            openLoadProvider.setUrl(links.url[0]);
+            openLoadProvider.getMediaLink(decodedUrl => {
+                data.url = decodedUrl;
+                if (--jobs == 0) {
+                    callback(data);
+                }
             });
         });
+    }
 
+    public clearTitle(title: string): string {
+        console.log("before: "+ title);
+        title = title.replace(/\(.+\)/g, '');
+        title = title.replace(/CAM/g, '');
+        title = title.replace(/LEKTOR/g, '');
+        title = title.replace(/HD/g, '');
+        title = title.replace(/ - /g, '');
+        title = title.replace(/[`~!@#$%^&*()_|+=?;:'",.<>{}\[\]\\\/]/gi, '');
+
+        title.trim();
+        console.log("after: "+ title);
+        return title;
     }
 }

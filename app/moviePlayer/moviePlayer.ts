@@ -1,20 +1,17 @@
 import * as jQuery from "jquery";
 let $ = jQuery;
 import 'bootstrap';
-import {Carousel} from "./utils/Carousel";
-import {Search} from "./utils/Search";
-
 
 /**
  * Created by Dawid on 04.05.2017.
  */
 
 $(document).ready(function () {
-    Carousel.initOwlCarousel();
-    Search.init();
+    const {ipcRenderer} = require('electron');
+    ipcRenderer.on('play-movie-msg', function(event, movie) {
+        $("#title").text("OpenFlix - " + movie.title + " - " + movie.url);
+    });
 });
-
-
 
 (function () {
 

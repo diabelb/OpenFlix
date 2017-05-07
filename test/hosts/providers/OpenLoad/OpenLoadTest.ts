@@ -26,7 +26,7 @@ describe('Hosts/Providers/OpenLoad', function() {
 
     describe("getMediaLink()", () => {
 
-        it("It should return correct media link for given htmlData", () => {
+        it("It should return correct media links for given htmlData", () => {
             assert.equal(openLoadProvider.getMediaLink(), "https://openload.co/stream/T71J_v66AD4~1493747158~89.76.0.0~qpQ-wz8l");
         })
     })

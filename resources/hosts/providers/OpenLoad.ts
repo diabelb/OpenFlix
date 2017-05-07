@@ -26,7 +26,9 @@ export class OpenLoad extends Host {
     }
 
     public getMediaLink(): string {
+        console.log("get media html:");
         let encryptedHtml = this.getEncryptedHtml();
+        console.log("decode html:");
         let decodedHtml = OpenLoad.decodeHtml(encryptedHtml);
         let encryptedUrlToFile = this.getEncryptedUrlToFile();
         let decodedUrlToFile = this.decodeUrlToFIle(decodedHtml, encryptedUrlToFile);
@@ -245,7 +247,7 @@ export class OpenLoad extends Host {
             return result[1];
         }
         else {
-            throw new Error("JS needed to get download link does not exist");
+            throw new Error("JS needed to get download links does not exist");
         }
     }
 

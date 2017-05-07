@@ -1,17 +1,20 @@
 import {RequestUtil} from "../../utils/RequestUtil";
 import * as cheerio from "cheerio";
 import {HostFactory} from "../../hosts/HostFactory";
+import {FilmWeb} from "../../content/FilmWeb";
 
 /**
  * Created by dawid on 04.05.17.
  */
 
-export class EKinoTvAsync {
+export class EKinoTv {
     private query: string;
     protected requestUtil: RequestUtil;
+    protected contentProvider: FilmWeb;
 
-    constructor(requestUtil) {
+    constructor(requestUtil, contentProvider: FilmWeb) {
         this.requestUtil = requestUtil;
+        this.contentProvider = contentProvider;
     }
 
     public setQuery(query: string) {
@@ -64,7 +67,7 @@ export class EKinoTvAsync {
             url: url,
         }, (error, response, body) => {
             if (error) {
-                console.log("Połączenie z adresem "+ url + " nie powiodło się. Problem z połączeniem.")
+                console.log("Połączenie z adresem " + url + " nie powiodło się. Problem z połączeniem.")
                 callback("");
             }
             else {
@@ -96,7 +99,7 @@ export class EKinoTvAsync {
         let total = moviesList.length;
         let left = moviesList.length;
         for (let movie of moviesList) {
-            this.getMovieHtml("http://ekino-tv.pl"+movie.url, movieHtml => {
+            this.getMovieHtml("http://ekino-tv.pl" + movie.url, movieHtml => {
                 this.processMovie(movieHtml, movie.title, total, --left, callback);
             });
         }
@@ -104,13 +107,29 @@ export class EKinoTvAsync {
 
     private processMovie(movieHtml, title, total, left, callback) {
         let movieHostLinks = this.getMovieHostLinks(movieHtml);
-        if (movieHostLinks[0]) {
-            callback({
-                title:  title,
-                url: movieHostLinks,
-                total: total,
-                left: left
+        callback({
+            title: title,
+            url: movieHostLinks,
+            total: total,
+            left: left
+        });
+    }
+
+    public getMoviesData(callback: (moviesData) => any) {
+        this.getMoviesWithHostLinks(links => {
+            this.contentProvider.setQuery(links.title);
+            this.contentProvider.getMovieData(movieData => {
+
+                callback({
+                    title: movieData.title,
+                    url: links.url,
+                    imgUrl: movieData.imgUrl,
+                    total: links.total,
+                    left: links.left,
+
+                });
             });
-        }
+        });
+
     }
 }

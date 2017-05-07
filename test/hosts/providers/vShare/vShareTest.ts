@@ -26,7 +26,7 @@ describe('Hosts/Providers/vShare', function() {
     });
     describe('getHtml()', function () {
 
-        it('should return movie html content', () => {
+        it('should return movie html links', () => {
             let vShareProvider = new VShare(requestMock);
             vShareProvider.setUrl("http://vshare.io/v/49869bd/width-600/height-400/");
             let htmlContent = vShareProvider.getHtml();
@@ -36,7 +36,7 @@ describe('Hosts/Providers/vShare', function() {
     });
     describe('getMediaLink()', function () {
 
-        it('should return movie download url link', () => {
+        it('should return movie download url links', () => {
             let vShareProvider = new VShare(requestMock);
             vShareProvider.setUrl("http://vshare.io/v/49869bd/width-600/height-400/");
             let mediaLink = vShareProvider.getMediaLink();

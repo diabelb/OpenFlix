@@ -5,9 +5,9 @@
 
 import * as assert from "assert";
 import * as fs from "fs";
-import {FilmyTo} from "../../../../../resources/content/providers/FilmyTo";
+import {FilmyTo} from "../../../../resources/links/providers/FilmyTo";
 
-describe('Content/Providers/FilmyTo', function () {
+describe('links/Providers/FilmyTo', function () {
     describe('setQuery(), getQuery()', () => {
         it('should save provided movie query', () => {
             let filmyToProvider = new FilmyTo(requestMock);

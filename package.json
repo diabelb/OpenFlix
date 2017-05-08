@@ -16,6 +16,7 @@
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.14",
     "electron": "^1.6.6",
+    "electron-packager": "^8.7.0",
     "mocha": "^3.3.0"
   },
   "dependencies": {
@@ -25,7 +26,6 @@
     "owl.carousel": "^2.2.0",
     "request": "^2.81.0",
     "request-cookies": "^1.1.0",
-    "sync-request": "^4.0.3",
     "typescript": "^2.3.2",
     "video.js": "^5.19.2"
   }

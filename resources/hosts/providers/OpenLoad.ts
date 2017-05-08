@@ -1,20 +1,21 @@
-/**
- * Decodes text encoded with AAEncoder
- * @author Dawid Boruta
- * @author diabelb@gmail.com
- */
-
-import * as vm from "vm";
+import {RequestUtil} from "../../utils/RequestUtil";
 import {AADecoder} from "../../utils/AADecoder";
+import * as vm from "vm";
 import {Host} from "../Host";
 
-export class OpenLoad extends Host {
+/**
+ * Created by Dawid on 07.05.2017.
+ */
+
+export class OpenLoad extends Host{
     private static readonly TAB_PATTERN = /<span id="([^"]+)">([^<>]+)<\/span>/g;
     private static readonly ENC_SCRIPT = /<script src="\/assets\/js\/video-js\/video\.js\.ol\.js"(.+)[\s\S]*/;
     private static readonly DEC_SCRIPT = /type="text\/javascript">(.[\s\S]+?)<\/script>/;
     private static readonly NEEDED_JS_FILTER = /^(.+?)}\);\s*\$\("#videooverlay/;
+    static readonly URL_REG_EXP = /http[s]*:\/\/openload.co[^'"&]+/;
     private htmlContent: string;
-    static URL_REG_EXP = /http[s]*:\/\/openload.co[^'"&]+/;
+    protected requestUtil: RequestUtil;
+    protected url: string;
 
     public setUrl(url: string) {
         this.htmlContent = null;
@@ -25,13 +26,24 @@ export class OpenLoad extends Host {
         return this.url;
     }
 
-    public getMediaLink(): string {
-        let encryptedHtml = this.getEncryptedHtml();
-        let decodedHtml = OpenLoad.decodeHtml(encryptedHtml);
-        let encryptedUrlToFile = this.getEncryptedUrlToFile();
-        let decodedUrlToFile = this.decodeUrlToFIle(decodedHtml, encryptedUrlToFile);
-
-        return "https://openload.co/stream/"+decodedUrlToFile;
+    public getMediaLink(callback: (decodedUrl)=>any) {
+        this.getHtml(htmlCode => {
+            if (htmlCode != "") {
+                let encryptedHtml = this.getEncryptedHtml(htmlCode);
+                if (encryptedHtml != "") {
+                    let decodedHtml = OpenLoad.decodeHtml(encryptedHtml);
+                    let encryptedUrlToFile = this.getEncryptedUrlToFile();
+                    let decodedUrlToFile = this.decodeUrlToFIle(decodedHtml, encryptedUrlToFile);
+                    callback('https://openload.co/stream/'+decodedUrlToFile);
+                }
+                else {
+                    callback("");
+                }
+            }
+            else {
+                callback("");
+            }
+        });
     }
 
     /**
@@ -48,13 +60,19 @@ export class OpenLoad extends Host {
         return jsCode;
     }
 
-    /**
-     * Returns html code of requested url
-     * @return {string}
-     */
-    private getHtml(): string {
-        let res = this.requestUtil.request('GET', this.getUrl(), {});
-        return res.body.toString("UTF-8");
+    public getHtml(callback: (htmlCode)=>any) {
+        this.requestUtil.request({
+            method: 'GET',
+            url: this.getUrl(),
+        }, (error, response, body) => {
+            if (error) {
+                console.log("Połączenie z adresem " + this.getUrl() + " nie powiodło się. Problem z połączeniem.")
+                callback("");
+            }
+            else {
+                callback(body.toString());
+            }
+        });
     }
 
     /**
@@ -62,14 +80,15 @@ export class OpenLoad extends Host {
      * @throws Error
      * @return {string}
      */
-    private getEncryptedHtml(): string {
-        this.htmlContent = this.getHtml();
+    private getEncryptedHtml(htmlCode: string): string {
+        this.htmlContent = htmlCode;
         let result = this.htmlContent.match(OpenLoad.ENC_SCRIPT);
         if (result) {
             return result[0];
         }
         else {
-            throw new Error("Encrypted HTML does not exists!");
+            console.log("Encrypted HTML does not exists! "+ this.getUrl());
+            return "";
         }
 
     }

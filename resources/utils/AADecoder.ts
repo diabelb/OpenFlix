@@ -25,7 +25,7 @@ export class AADecoder {
      * @returns {boolean}
      */
     public isAAEncoded(): boolean {
-        return (this.encodedStr.includes(AADecoder.BEGIN_CODE) && this.encodedStr.includes(AADecoder.ENDING_CODE));
+        return (this.encodedStr.indexOf(AADecoder.BEGIN_CODE) != -1 && this.encodedStr.indexOf(AADecoder.ENDING_CODE) != -1);
     }
 
     /**
@@ -74,7 +74,7 @@ export class AADecoder {
         let data = this.codeBuffer.substr(AADecoder.BEGIN_CHAR.length);
         let encChar = "";
 
-        if (!data.includes(AADecoder.BEGIN_CHAR)) {
+        if (data.indexOf(AADecoder.BEGIN_CHAR) == -1) {
             encChar = data;
             data = "";
         }
@@ -99,7 +99,7 @@ export class AADecoder {
         }
 
         encChar = AADecoder.replaceWithEncodedChars(encChar);
-        if (encChar.startsWith('(')) {
+        if (encChar.indexOf('(') === 0) {
             let charArray = AADecoder.splitCharsIntoArray(encChar);
             encChar = AADecoder.parseCharArray(charArray);
         }
@@ -114,7 +114,7 @@ export class AADecoder {
     private static detectRadix(encChar: string): number {
         let radix = 8;
 
-        if (encChar.includes(AADecoder.HEX_CHAR)) {
+        if (encChar.indexOf(AADecoder.HEX_CHAR) != -1) {
             radix = 16;
         }
         return radix;
@@ -130,7 +130,7 @@ export class AADecoder {
         let v = '';
             for (let c of rer) {
                 if (c.length > 0) {
-                    if (c.trim().endsWith('+')) {
+                    if (c.trim().indexOf('+', this.length - '+'.length) !== -1) { //c.trim().endsWith
                         c = c.trim().substring(0, c.trim().length - 1);
                     }
                     let startBrackets = c.length - (c.replace('(', '').length);

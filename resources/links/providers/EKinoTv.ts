@@ -1,7 +1,6 @@
 import {RequestUtil} from "../../utils/RequestUtil";
 import * as cheerio from "cheerio";
 import {HostFactory} from "../../hosts/HostFactory";
-import {OpenLoadAsync} from "../../hosts/providers/OpenLoadAsync";
 
 /**
  * Created by dawid on 04.05.17.
@@ -120,12 +119,17 @@ export class EKinoTv {
 
     public getMovieData(callback: (moviesData) => any) {
         this.getMoviesWithHostLinks(links => {
-            let openLoadProvider = new OpenLoadAsync(this.requestUtil);
-            openLoadProvider.setUrl(links.url[0]);
-            openLoadProvider.getMediaLink(decodedUrl => {
-                links.url = decodedUrl;
+            let hostFactory = new HostFactory(this.requestUtil);
+            let host = hostFactory.getHost(links.url[0]);
+            if (host != null) {
+                host.getMediaLink(decodedUrl => {
+                    links.url = decodedUrl;
+                    callback(links);
+                });
+            }
+            else {
                 callback(links);
-            });
+            }
         });
     }
 

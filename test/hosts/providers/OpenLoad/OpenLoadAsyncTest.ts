@@ -3,19 +3,19 @@
  */
 
 import * as assert from "assert";
-import {OpenLoadAsync} from "../../../../resources/hosts/providers/OpenLoadAsync";
+import {OpenLoad} from "../../../../resources/hosts/providers/OpenLoad";
 import * as fs from "fs";
 
 describe('Hosts/Providers/OpenLoad', function() {
     describe('getUrl(), setUrl()', function () {
 
         it('should return \'\' when url is not set', () => {
-            let openLoadProvider = new OpenLoadAsync(requestMock);
+            let openLoadProvider = new OpenLoad(requestMock);
             assert.equal(openLoadProvider.getUrl(), '');
         });
 
         it('should return given url', () => {
-            let openLoadProvider = new OpenLoadAsync(requestMock);
+            let openLoadProvider = new OpenLoad(requestMock);
             let url = "https://openload.co/embed/T71J_v66AD4";
             openLoadProvider.setUrl(url);
 
@@ -26,7 +26,7 @@ describe('Hosts/Providers/OpenLoad', function() {
     describe('getHtml()', () => {
         let html = null;
         beforeEach(done => {
-            let openLoadProvider = new OpenLoadAsync(requestMock);
+            let openLoadProvider = new OpenLoad(requestMock);
             let url = "https://openload.co/embed/T71J_v66AD4";
             openLoadProvider.setUrl(url);
             openLoadProvider.getHtml(htmlCode => {
@@ -43,7 +43,7 @@ describe('Hosts/Providers/OpenLoad', function() {
     describe("getMediaLink()", () => {
         let decUrl = null;
         beforeEach(done => {
-            let openLoadProvider = new OpenLoadAsync(requestMock);
+            let openLoadProvider = new OpenLoad(requestMock);
             let url = "https://openload.co/embed/T71J_v66AD4";
             openLoadProvider.setUrl(url);
             openLoadProvider.getMediaLink(decodedUrl => {

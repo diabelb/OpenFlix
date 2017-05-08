@@ -3,15 +3,15 @@
  * @author diabelb@gmail.com
  */
 
-import {SyncRequestUtil} from "../utils/SyncRequestUtil";
+import {RequestUtil} from "../utils/RequestUtil";
 
 export abstract class Host {
 
-    protected requestUtil: SyncRequestUtil;
+    protected requestUtil: RequestUtil;
     protected url: string;
     static URL_REG_EXP;
 
-    constructor(requestUtil: SyncRequestUtil) {
+    constructor(requestUtil: RequestUtil) {
         this.url = "";
         this.requestUtil = requestUtil;
     }
@@ -20,7 +20,7 @@ export abstract class Host {
      * Returns downloadable url to video resource
      * @return {string}
      */
-    abstract getMediaLink(): string;
+    abstract getMediaLink(callback: (decodedUrl)=>any): void;
 
     /**
      * Sets url to page with video

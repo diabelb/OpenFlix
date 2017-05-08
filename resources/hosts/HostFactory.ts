@@ -4,9 +4,8 @@
  */
 
 import {Host} from "./Host";
-import {SyncRequestUtil} from "../utils/SyncRequestUtil";
+import {RequestUtil} from "../utils/RequestUtil";
 import {OpenLoad} from "./providers/OpenLoad";
-import {VShare} from "./providers/VShare";
 
 
 export class HostFactory {
@@ -14,18 +13,21 @@ export class HostFactory {
 
     public static readonly PROVIDERS = [
         [OpenLoad.URL_REG_EXP, OpenLoad],
-        [VShare.URL_REG_EXP, VShare]
     ];
-    constructor(requestUtil?: SyncRequestUtil) {
+    constructor(requestUtil?: RequestUtil) {
         if (requestUtil) {
             this.requestUtil = requestUtil;
         }
         else {
-            this.requestUtil = new SyncRequestUtil();
+            this.requestUtil = new RequestUtil();
         }
     }
 
     public getHost(url: string): Host {
+        if (!url) {
+            return null;
+        }
+
         for (let provider of HostFactory.PROVIDERS) {
             let result = url.match(<RegExp>provider[0]);
             if (result) {

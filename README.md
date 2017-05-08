@@ -4,17 +4,23 @@ Wyszukiwarka filmów online.
 
 ![Alt OpenFlix](https://github.com/diabelb/OpenFlix/blob/master/preview.png?raw=true "OpenFlix")
 
-# Wymagania
+# Instalacja ze źródeł
+
+* Wymagania
+
 Zainstalowane Node.js https://nodejs.org
 
-# Pobieranie
+* Pobieranie
+
 git clone https://github.com/diabelb/OpenFlix.git
 
-# Instalacja
+* Instalacja
+
 cd OpenFlix
 
 npm install
 
-# Uruchomienie
+* Uruchomienie
+
 npm start
 

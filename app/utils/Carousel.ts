@@ -11,10 +11,10 @@ export class Carousel {
     static initOwlCarousel() {
     let owl = $('.owl-carousel');
     owl.owlCarousel({
-        loop: true,
+        loop: false,
         nav: false,
         margin: 4,
-        center: true,
+        center: false,
         responsive: {
             600: {
                 items: 4

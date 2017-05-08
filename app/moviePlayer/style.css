@@ -9,7 +9,7 @@ body {
     margin: 0;
     background-color: #2D2D30;
     border: 1px solid #68217A;
-    border-bottom: 24px solid #68217A;
+    border-bottom: 1px solid #68217A;
     position: absolute;
     top: 0;
     left: 0;
@@ -55,14 +55,13 @@ body {
 }
 
 #content {
-    padding: 12px;
+    padding: 0px;
     color: #CCCCCC;
+    width: 100%;
+    height: calc(100% - 32px);
 }
 
-#bottom {
-    color: white;
-    position: fixed;
-    left: 10px;
-    bottom: 3px;
-    font-size: 12px;
+#my-video {
+    width: 100%;
+    height: 100%;
 }

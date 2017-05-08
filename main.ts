@@ -22,8 +22,8 @@ function createMainWindow() {
 
 function createMovieWindow() {
     let movieWindow;
-    movieWindow = new BrowserWindow({width: 834, height: 480, frame: false, resizable: false, show: false});
-    movieWindow.setResizable(false);
+    movieWindow = new BrowserWindow({width: 834, height: 480, frame: false, resizable: true, show: false});
+    movieWindow.setResizable(true);
     movieWindow.loadURL(`file://${__dirname}/app/moviePlayer/moviePlayer.html`);
 
     // Open the DevTools.

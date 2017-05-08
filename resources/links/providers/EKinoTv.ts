@@ -1,7 +1,6 @@
 import {RequestUtil} from "../../utils/RequestUtil";
 import * as cheerio from "cheerio";
 import {HostFactory} from "../../hosts/HostFactory";
-import {FilmWeb} from "../../content/FilmWeb";
 import {OpenLoadAsync} from "../../hosts/providers/OpenLoadAsync";
 
 /**
@@ -11,11 +10,9 @@ import {OpenLoadAsync} from "../../hosts/providers/OpenLoadAsync";
 export class EKinoTv {
     private query: string;
     protected requestUtil: RequestUtil;
-    protected contentProvider: FilmWeb;
 
-    constructor(requestUtil, contentProvider: FilmWeb) {
+    constructor(requestUtil) {
         this.requestUtil = requestUtil;
-        this.contentProvider = contentProvider;
     }
 
     public setQuery(query: string) {
@@ -111,55 +108,59 @@ export class EKinoTv {
 
     private processMovie(movieHtml, title, total, left, callback) {
         let movieHostLinks = this.getMovieHostLinks(movieHtml);
+        let movieImg = this.getMovieImg(movieHtml);
         callback({
             title: title,
             url: movieHostLinks,
+            imgUrl: movieImg,
             total: total,
             left: left
         });
     }
 
-    public getMoviesData(callback: (moviesData) => any) {
+    public getMovieData(callback: (moviesData) => any) {
         this.getMoviesWithHostLinks(links => {
-            let jobs = 2;
-            let data = {
-                title: null,
-                imgUrl: null,
-                url: links.url,
-                total: links.total,
-                left: links.left,
-            };
-            this.contentProvider.setQuery(this.clearTitle(links.title));
-            this.contentProvider.getMovieData(movieData => {
-                data.title = movieData.title;
-                data.imgUrl = movieData.imgUrl;
-                if (--jobs == 0) {
-                    callback(data);
-                }
-            });
-
-            let openLoadProvider = new OpenLoadAsync(new RequestUtil());
+            let openLoadProvider = new OpenLoadAsync(this.requestUtil);
             openLoadProvider.setUrl(links.url[0]);
             openLoadProvider.getMediaLink(decodedUrl => {
-                data.url = decodedUrl;
-                if (--jobs == 0) {
-                    callback(data);
-                }
+                links.url = decodedUrl;
+                callback(links);
             });
         });
     }
 
-    public clearTitle(title: string): string {
-        console.log("before: "+ title);
-        title = title.replace(/\(.+\)/g, '');
-        title = title.replace(/CAM/g, '');
-        title = title.replace(/LEKTOR/g, '');
-        title = title.replace(/HD/g, '');
-        title = title.replace(/ - /g, '');
-        title = title.replace(/[`~!@#$%^&*()_|+=?;:'",.<>{}\[\]\\\/]/gi, '');
 
-        title.trim();
-        console.log("after: "+ title);
-        return title;
+
+    public getMovieImg(movieHtml: string) {
+        let img = "";
+        let result = movieHtml.match(/\/static\/normal\/.+jpg/);
+        if (result) {
+            img = result[0];
+        }
+        return "http://ekino-tv.pl"+img;
+    }
+
+    getAllMoviesData(callback: (moviesData)=>any) {
+        let total = null;
+        let data = [];
+        
+        this.getMovieData(moviesData => {
+            if (total == null) {
+                total = moviesData.total;
+            }
+            if (total > 0) {
+                if (moviesData.url == "" || moviesData.imgUrl == "") {
+                    total--;
+                }
+                else {
+                    data.push(moviesData);
+                }
+            }
+
+            if (data.length == total) {
+                callback(data);
+            }
+        });
+
     }
 }

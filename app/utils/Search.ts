@@ -5,7 +5,6 @@
 import {RequestUtil} from "../../resources/utils/RequestUtil";
 import {EKinoTv} from "../../resources/links/providers/EKinoTv";
 import * as $ from "jquery";
-import {FilmWeb} from "../../resources/content/FilmWeb";
 import {Carousel} from "./Carousel";
 
 export class Search {
@@ -14,27 +13,24 @@ export class Search {
         $(".search-input").on("change", function (e) {
             let searchMovie = $(this).val();
             let request = new RequestUtil();
-            let contentProvider = new FilmWeb(request);
-            let eKino = new EKinoTv(request, contentProvider);
+            let eKino = new EKinoTv(request);
             eKino.setQuery(searchMovie);
             Carousel.hide();
             let temp = '';
             $("#bottom").text("Wyszukuję  -  "+searchMovie+"...");
-            eKino.getMoviesData(moviesData => {
-                if (moviesData.imgUrl != '' && moviesData.url != '') {
-                    temp += '<div class="poster" title="'+moviesData.title+'" url="'+moviesData.url+'"><img src="' + moviesData.imgUrl + '"/><span class="glyphicon glyphicon-play-circle play-icon"></span></div>';
-                }
-                console.log("TEMP:")
-                console.log("temp: "+temp);
-                if (moviesData.left == 0 && (moviesData.total == 0 || temp == '')) {
+            eKino.getAllMoviesData(moviesData => {
+                if (moviesData.length == 0) {
                     $("#bottom").text("Gotowe  -  nie znaleziono");
                 }
-                else if (moviesData.left == 0 && moviesData.total > 0) {
-                    $("#bottom").text("Gotowe");
+                else {
+                    for (let movie of moviesData) {
+                        temp += '<div class="poster" title="'+movie.title+'" url="'+movie.url+'"><img src="' + movie.imgUrl + '" height="285px"/><span class="glyphicon glyphicon-play-circle play-icon"></span></div>';
+                    }
+
+                    $("#bottom").text("Gotowe - Znaleziono - " + moviesData.length);
                     Carousel.replace(temp);
                     Carousel.show();
                 }
-
             });
         });
     }

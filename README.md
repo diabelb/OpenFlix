@@ -1,5 +1,7 @@
 # OpenFlix
 
+[![Build Status](https://travis-ci.org/diabelb/OpenFlix.svg?branch=master)](https://travis-ci.org/diabelb/OpenFlix)
+
 Wyszukiwarka filmów online.
 
 ![Alt OpenFlix](https://github.com/diabelb/OpenFlix/blob/master/preview.png?raw=true "OpenFlix")

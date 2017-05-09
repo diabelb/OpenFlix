@@ -1,6 +1,7 @@
 # OpenFlix
 
 [![Build Status](https://travis-ci.org/diabelb/OpenFlix.svg?branch=master)](https://travis-ci.org/diabelb/OpenFlix)
+[![Coverage Status](https://coveralls.io/repos/github/diabelb/OpenFlix/badge.svg?branch=master)](https://coveralls.io/github/diabelb/OpenFlix?branch=master)
 
 Wyszukiwarka filmów online.
 

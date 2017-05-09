@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "postinstall": "node ./node_modules/typescript/bin/tsc",
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec",
+    "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --recursive",
+    "test-on-travis": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec",
     "start": "electron main.js"
   },
   "keywords": [],

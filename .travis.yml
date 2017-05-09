@@ -3,3 +3,5 @@ node_js:
   - "7"
 install:
   - npm install --dev
+# Send coverage data to Coveralls
+after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

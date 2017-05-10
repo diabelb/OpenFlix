@@ -1,6 +1,6 @@
 {
   "name": "OpenFlix",
-  "version": "1.0.0",
+  "version": "0.1",
   "description": "Best free opensource movie player.",
   "main": "main.js",
   "scripts": {

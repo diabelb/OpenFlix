@@ -12,6 +12,6 @@ install:
   - npm install --dev
 # Send coverage data to Coveralls
 script:
-  "npm run-script test-on-travis"
-  "npm run-script dist"
+  - npm run-script test-on-travis
+  - npm run-script dist
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

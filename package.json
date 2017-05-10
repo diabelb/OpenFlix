@@ -7,7 +7,7 @@
   "author": {
     "name": "Dawid Boruta",
     "email": "diabelb@gmail.com",
-    "url": "https://github.com/diabelb/OpenFlix",
+    "url": "https://github.com/diabelb/OpenFlix"
   },
   "main": "main.js",
   "build": {

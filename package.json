@@ -2,6 +2,8 @@
   "name": "OpenFlix",
   "version": "v0.1.0",
   "description": "Best free opensource movie player.",
+  "keywords": [],
+  "license": "ISC",
   "author": {
     "name": "Dawid Boruta",
     "email": "diabelb@gmail.com",
@@ -44,9 +46,6 @@
     "start": "electron main.js",
     "dist": "build && build --publish onTagOrDraft"
   },
-  "keywords": [],
-  "author": "Dawid Boruta",
-  "license": "ISC",
   "devDependencies": {
     "@types/cheerio": "^0.22.1",
     "@types/mocha": "^2.2.41",

@@ -1,8 +1,17 @@
+matrix:
+  include:
+    - os: osx
+    - os: linux
+
 language: node_js
 node_js:
   - "7"
+
 install:
+  - npm install electron-builder
   - npm install --dev
 # Send coverage data to Coveralls
-script: "npm run-script test-on-travis"
+script:
+  "npm run-script test-on-travis"
+  - npm run dist
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

@@ -44,7 +44,7 @@
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --recursive",
     "test-on-travis": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec",
     "start": "electron main.js",
-    "dist": "build && build --publish onTagOrDraft"
+    "dist": "build && build --publish onTag"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.1",

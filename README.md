@@ -1,6 +1,7 @@
 # OpenFlix
 
 [![Build Status](https://travis-ci.org/diabelb/OpenFlix.svg?branch=master)](https://travis-ci.org/diabelb/OpenFlix)
+[![Build status](https://ci.appveyor.com/api/projects/status/tp565om6karof6ec?svg=true)](https://ci.appveyor.com/project/diabelb/openflix)
 [![Coverage Status](https://coveralls.io/repos/github/diabelb/OpenFlix/badge.svg?branch=master)](https://coveralls.io/github/diabelb/OpenFlix?branch=master)
 
 Najlepsza wyszukiwarka filmów online. Wpisujesz tytuł, znajdujesz, oglądasz - to takie proste.

@@ -11,7 +11,7 @@ Najlepsza wyszukiwarka filmów online. Wpisujesz tytuł, znajdujesz, oglądasz -
 # Pobieranie
 Dostępne wersje dla systemów Windows, Mac OS, Linux
 
-https://github.com/diabelb/OpenFlix/releases
+https://github.com/diabelb/OpenFlix/releases/latest
 
 # Instalacja ze źródeł
 

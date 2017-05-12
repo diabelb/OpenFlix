@@ -33,3 +33,7 @@ npm install
 
 npm start
 
+* Budowanie instalki
+
+npm run build
+

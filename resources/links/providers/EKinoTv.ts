@@ -64,10 +64,11 @@ export class EKinoTv {
             url: url,
         }, (error, response, body) => {
             if (error) {
-                console.log("Połączenie z adresem " + url + " nie powiodło się. Problem z połączeniem.")
+                console.log("Połączenie z adresem " + url + " nie powiodło się. Problem z połączeniem.");
                 callback("");
             }
             else {
+
                 callback(body.toString());
             }
         });
@@ -75,21 +76,36 @@ export class EKinoTv {
 
     public getMovieHostLinks(movieHtml: string) {
         let links = [];
-        for (let item of HostFactory.PROVIDERS) {
+
+        /*for (let item of HostFactory.PROVIDERS) {
             let providerRegExp = item[0];
             let result = movieHtml.match(<RegExp>providerRegExp);
             if (result) {
                 let foundLink = result[0];
                 links.push(foundLink);
             }
-        }
-        return links;
+        }*/
+        return ['https://openload.co/embed/iKqXWRAn_uI'];
+
     }
+
 
     public getMoviesWithHostLinks(callback: (links) => any) {
         this.getMoviesListArray(moviesList => {
             this.processMoviesList(moviesList, callback);
         });
+    }
+
+    public getEmbedFrameUrl(movieHtml: string) {
+        let openLoadRexexp = /'openload','(.+)'/;
+        let result = movieHtml.match(<RegExp>openLoadRexexp);
+        if (result) {
+            let hash = result[1];
+            return "http://ekino-tv.pl/watch/openload/" + hash;
+        }
+        else {
+            return "";
+        }
     }
 
     private processMoviesList(moviesList, callback) {
@@ -106,15 +122,22 @@ export class EKinoTv {
     }
 
     private processMovie(movieHtml, title, total, left, callback) {
-        let movieHostLinks = this.getMovieHostLinks(movieHtml);
-        let movieImg = this.getMovieImg(movieHtml);
-        callback({
-            title: title,
-            url: movieHostLinks,
-            imgUrl: movieImg,
-            total: total,
-            left: left
-        });
+        let embedFrameLink = this.getEmbedFrameUrl(movieHtml);
+        //let that = this;
+
+       // this.getMovieHtml(embedFrameLink, function (html) {
+      //      console.log(html);
+            let movieHostLinks = this.getMovieHostLinks(movieHtml);
+            let movieImg = this.getMovieImg(movieHtml);
+            callback({
+                title: title,
+                url: movieHostLinks,
+                imgUrl: movieImg,
+                total: total,
+                left: left
+            });
+     //   });
+
     }
 
     public getMovieData(callback: (moviesData) => any) {
@@ -134,20 +157,19 @@ export class EKinoTv {
     }
 
 
-
     public getMovieImg(movieHtml: string) {
         let img = "";
         let result = movieHtml.match(/\/static\/normal\/.+jpg/);
         if (result) {
             img = result[0];
         }
-        return "http://ekino-tv.pl"+img;
+        return "http://ekino-tv.pl" + img;
     }
 
-    getAllMoviesData(callback: (moviesData)=>any) {
+    getAllMoviesData(callback: (moviesData) => any) {
         let total = null;
         let data = [];
-        
+
         this.getMovieData(moviesData => {
             if (total == null) {
                 total = moviesData.total;

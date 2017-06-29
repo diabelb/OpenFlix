@@ -59,7 +59,7 @@ describe('links/Providers/EKinoTv', function () {
     describe('getMovieHostLinks()', () => {
         it('Finds movie host links for given movie url', () => {
             let eKino = new EKinoTv(requestMock);
-            let hostLinks = eKino.getMovieHostLinks(mockedSingleMovieData);
+            let hostLinks = eKino.getMovieHostLinks(mockedEmbedFrameData);
             assert.equal(hostLinks[0], 'https://openload.co/embed/iKqXWRAn_uI');
         });
     });
@@ -129,12 +129,17 @@ describe('links/Providers/EKinoTv', function () {
 let mockedOpenloadData = fs.readFileSync(__dirname+"/mockedOpenLoadRequest", "UTF-8");
 let mockedSearchData = fs.readFileSync(__dirname + "/mockedSearchRequest", "UTF-8");
 let mockedSingleMovieData = fs.readFileSync(__dirname + "/mockedSingleMovieRequest", "UTF-8");
+let mockedEmbedFrameData = fs.readFileSync(__dirname + "/mockedEmbedFrameRequest", "UTF-8");
+
 let requestMock = {
     request: (options, callback) => {
         if (options.method == "POST" &&
             options.body != "" && options.body != "search_field="
             && options.headers['Content-Type'] == "application/x-www-form-urlencoded") {
             callback("", "", requestMock.responseSearch.body);
+        }
+        else if (options.method == "GET" && options.url.match("watch")) {
+            callback("", "", requestMock.responseEmbedFrame.body);
         }
         else if (options.method == "GET" && options.url.match("openload")) {
             callback("", "", requestMock.responseOpenLoad.body);
@@ -157,6 +162,13 @@ let requestMock = {
         body: {
             toString: () => {
                 return mockedSingleMovieData;
+            }
+        }
+    },
+    responseEmbedFrame: {
+        body: {
+            toString: () => {
+                return mockedEmbedFrameData;
             }
         }
     },

@@ -9,7 +9,7 @@ import {Host} from "../Host";
 
 export class OpenLoad extends Host{
     private static readonly TAB_PATTERN = /<span id="([^"]+)">([^<>]+)<\/span>/g;
-    private static readonly ENC_SCRIPT = /<script src="\/assets\/js\/video-js\/video\.js\.ol\.js"(.+)[\s\S]*/;
+    private static readonly ENC_SCRIPT = /<script src="\/assets\/js\/video-js\/video\.js\.openload\.js"(.+)[\s\S]*/;
     private static readonly DEC_SCRIPT = /type="text\/javascript">(.[\s\S]+?)<\/script>/;
     private static readonly NEEDED_JS_FILTER = /^(.+?)}\);\s*\$\("#videooverlay/;
     static readonly URL_REG_EXP = /http[s]*:\/\/openload.co[^'"&]+/;

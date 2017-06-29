@@ -9,7 +9,7 @@
 <meta name="keywords" content="Harry Potter i Kamień Filozoficzny - HD / Harry Potter and the Sorcerer's Stone,Harry,Potter,Kamień,Filozoficzny,HD,and,the,Sorcerer,Stone, online, za darmo, bez limitu, film online, serial online">
 <link rel="icon" type="image/png" href="/views/img/shortcut.png"/>
 <link href="http://ekino-tv.pl/views/js/bootstrap.min.css" rel="stylesheet">
-<link href="/views/css/style.css?1491997275" rel="stylesheet">
+<link href="/views/css/style.css?1497549591" rel="stylesheet">
 
 <link href='http://ekino-tv.pl/views/js/family.css' rel='stylesheet' type='text/css'>
 <script src="http://ekino-tv.pl/views/js/jquery.js"></script>
@@ -32,14 +32,16 @@
 </head>
 <body>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.3";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
+
+<script>
+	// (function(d, s, id) {
+	//   var js, fjs = d.getElementsByTagName(s)[0];
+	//   if (d.getElementById(id)) return;
+	//   js = d.createElement(s); js.id = id;
+	//   js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.3";
+	//   fjs.parentNode.insertBefore(js, fjs);
+	// }(document, 'script', 'facebook-jssdk'));
+	</script>
 <style>#cookies{padding:10px;text-align:center;border:1px solid rgb(160,41,41);font-size:13px;opacity:0.8;-moz-opacity:0.8;}</style>
 <div id="cookies">W ramach naszej strony stosujemy pliki cookies w celu świadczenia usług na najwyższym poziomie. Korzystanie z witryny bez zmiany ustawień cookies oznacza, że będą one zamieszczane w Twoim urządzeniu końcowym. Możesz w każdym czasie dokonać zmiany ustawień dotyczących cookies. <button type="button" class="btn btn-info">Akceptuje</button></div>
 <header>
@@ -51,6 +53,8 @@
 <div class="search_field"><input type="text" name="search_field" id="search_field" placeholder="Podaj tytuł filmu lub serialu" autocomplete="off"></div>
 <input class="btn-sb" style="margin-left:310px;width:80px;" type="submit" value="Szukaj">
 <div id="movie-result">
+<div id="nLoad" style="display:none;"><div class="c-loading__spinner c-loading__spinner--four"></div></div>
+<div id="mres"></div>
 </div>
 </form>
 </div>
@@ -108,7 +112,7 @@ Harry jest jedyną osobą, kt&oacute;rej udaje się przeżyć spotkanie ze złym
 <div class="infoIcon"></div>
 <div class="infoContainer2" style="display: none;">
 <div class="infoContent">
-Odsłon: <font color="white">10855</font>&nbsp;Dodano: <font color="white">2016-12-22 09:36:49</font>
+Odsłon: <font color="white">14148</font>&nbsp;Dodano: <font color="white">2016-12-22 09:36:49</font>
 </div>
 </div>
 <script>
@@ -125,13 +129,13 @@ Odsłon: <font color="white">10855</font>&nbsp;Dodano: <font color="white">2016-
 
 <div class="col-md-9" style="width:656px;min-height:400px;padding:0;margin-top:20px;margin-bottom:20px;">
 <div class="playerContainer">
-<div style="height:40px;">
+<div style="min-height:40px;overflow: hidden;">
 <ul class="players" role="tablist" id="myTab">
-<li><a href="#iKqXWRAn_uI-openload" data-toggle="tab">openload
+<li><a href="#bkhna0pTcUZESjVzcUh4PQclmn-openload" data-toggle="tab">openload
 <i class="glyphicon glyphicon-bullhorn" title="Lektor PL"></i>
 <img src="/views/img/q3.png" title="Wysoka jakość"/>
 </a></li>
-<li><a href="#73786ff-vshare" data-toggle="tab">vshare
+<li><a href="#QW1aM0JRTXpNdD09clmn-vshare" data-toggle="tab">vshare
 <i class="glyphicon glyphicon-bullhorn" title="Lektor PL"></i>
 <img src="/views/img/q3.png" title="Wysoka jakość"/>
 </a></li> <li><a href="#rek" data-toggle="tab"><span>Vidadd</span></a></li> <li><a href="#premium" data-toggle="tab"><span>Odtwarzacz bez limitów</span></a></li>
@@ -143,13 +147,13 @@ Odsłon: <font color="white">10855</font>&nbsp;Dodano: <font color="white">2016-
 <strong>Wystąpił problem!</strong> Prawdopodobnie film został usunięty.
 </div>
 <div class="tab-content">
-<div role="tabpanel" class="tab-pane fade" id="iKqXWRAn_uI-openload">
-<a onClick="ShowPlayer('https://openload.co/embed/iKqXWRAn_uI','iKqXWRAn_uI')"><img style="width:640px;height:360px;cursor:pointer;" src="/views/img/kliknij_aby_obejrzec.jpg" id="freePlayerClickf_iKqXWRAn_uI" alt="Kliknij aby obejrzeć"></a>
-<div id="fplayer_iKqXWRAn_uI"></div>
+<div role="tabpanel" class="tab-pane fade" id="bkhna0pTcUZESjVzcUh4PQclmn-openload">
+<a onClick="ShowPlayer('openload','bkhna0pTcUZESjVzcUh4PQclmn')"><img style="width:640px;height:360px;cursor:pointer;" src="/views/img/kliknij_aby_obejrzec.jpg" id="freePlayerClickf_bkhna0pTcUZESjVzcUh4PQclmn" alt="Kliknij aby obejrzeć"></a>
+<div id="fplayer_bkhna0pTcUZESjVzcUh4PQclmn"></div>
 </div>
-<div role="tabpanel" class="tab-pane fade" id="73786ff-vshare">
-<a onClick="ShowPlayer('/watch.php?hosting=vshare&id=73786ff','73786ff')"><img style="width:640px;height:360px;cursor:pointer;" src="/views/img/kliknij_aby_obejrzec.jpg" id="freePlayerClickf_73786ff" alt="Kliknij aby obejrzeć"></a>
-<div id="fplayer_73786ff"></div>
+<div role="tabpanel" class="tab-pane fade" id="QW1aM0JRTXpNdD09clmn-vshare">
+<a onClick="ShowPlayer('vshare','QW1aM0JRTXpNdD09clmn')"><img style="width:640px;height:360px;cursor:pointer;" src="/views/img/kliknij_aby_obejrzec.jpg" id="freePlayerClickf_QW1aM0JRTXpNdD09clmn" alt="Kliknij aby obejrzeć"></a>
+<div id="fplayer_QW1aM0JRTXpNdD09clmn"></div>
 </div>
 <div class="tab-pane fade" id="rek">
 <a target="_blank" rel="nofollow" href="http://ad0007.net/rg/gBNimQ3GiDG1oDEo"><img style="border:none;" src="http://afftrack001.com/files/a7fafc4ae7856d1243c81f5dc2ee37f5ec719668.png" width="640" height="346"></a>
@@ -196,7 +200,7 @@ Odsłon: <font color="white">10855</font>&nbsp;Dodano: <font color="white">2016-
       });
       </script>
 <script>
-      function ShowPlayer(code,id){
+      function ShowPlayer(host,id){
                 $('#over-player').show();
         $('#freePlayerClickf_' + id).hide();
         time = 5;
@@ -207,7 +211,7 @@ Odsłon: <font color="white">10855</font>&nbsp;Dodano: <font color="white">2016-
           } else{
             $('#freePlayerClickf_' + id).hide();
             $('#over-player').fadeOut();
-            $('#fplayer_' + id).html('<iframe id="iframes" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" src="' + code + '" scrolling="no" style="width: 640px; height: 420px;"></iframe>');
+            $('#fplayer_' + id).html('<iframe id="iframes" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" src="/watch/' + host + '/' + id +'" scrolling="no" style="width: 640px; height: 420px;"></iframe>');
           }
         })();
               }
@@ -224,6 +228,7 @@ $( window ).load(function() {
 </script>
 </div>
 <br/>
+<span style="color:#616161">------- AD -------</span><br/>
 <a target="_blank" rel="nofollow" href="http://ad0007.net/rg/EdqTrjXKbMi1HVSg"><img src="/views/img/reklama_btn2.png"/></a>
 </div>
 <br style="clear:both">
@@ -235,6 +240,12 @@ Zaloguj się aby dodawać komentarze
 </p>
 </div>
 <div style="margin-top:20px;">
+<div class="divcomment">
+<img src="/static/avatars/default.jpg">
+<div class="body">
+zawsze fajnie sie to oglada <div class="info">Dodany dnia 2017-05-05 18:54:55 przez <a href="/user/profile/132603">piotrek1812</a>&nbsp;</div>
+</div>
+</div>
 <div class="divcomment">
 <img src="/static/avatars/default.jpg">
 <div class="body">
@@ -294,11 +305,11 @@ function commentC(){
 <div class="scorediv">
 <div class="score">
 <div style="float:left;margin-top:3px;"><div class="s-star_big"></div></div>
-<div id="scoreSum" style="float:right;">9.3<br/><span id="glosow">26 Głosów</span></div>
+<div id="scoreSum" style="float:right;">9.4<br/><span id="glosow">31 Głosów</span></div>
 </div>
 <div class="likeit">
 <div style="float:left;margin-top:4px;"><div class="s-hearth_big"></div></div>
-<div id="scoreSum" style="float:left;margin-left:5px;margin-top:-2px;">12</div>
+<div id="scoreSum" style="float:left;margin-left:5px;margin-top:-2px;">17</div>
 </div>
 </div>
 </div>
@@ -326,13 +337,13 @@ function commentC(){
 </div></a>
 <a href="http://ekino-tv.pl/movie/show/harry-potter-i-ksiaze-polkrwi-hd-harry-potter-and-the-half-blood-prince-2009-dubbing/4578"><div class="related_item">
 <img src="http://ekino-tv.pl/static/thumb/f2iqkvmtqkc2.jpg" class="related"/>
-<div style="display:none;" class="title_related"><i class="glyphicon glyphicon-bookmark"></i> Harry Potter i Książę P&oacute;łkrwi - HD / Harry Potter and the Half-Blood Prince</div>
+<div style="display:none;" class="title_related"><i class="glyphicon glyphicon-bookmark"></i> Harry Potter i Książę Półkrwi - HD / Harry Potter and the Half-Blood Prince</div>
 <div style="display:none;" class="year_related"><i class="glyphicon glyphicon-align-left"></i> 2009</div>
 <div style="display:none;" class="lang_related"><i class="glyphicon glyphicon-info-sign"></i> Dubbing</div>
 </div></a>
 <a href="http://ekino-tv.pl/movie/show/harry-potter-i-ksiaze-polkrwi-harry-potter-and-the-half-blood-prince-2009-lektor/13459"><div class="related_item">
 <img src="http://ekino-tv.pl/static/thumb/u64xwm7h2xw4.jpg" class="related"/>
-<div style="display:none;" class="title_related"><i class="glyphicon glyphicon-bookmark"></i> Harry Potter i Książę P&oacute;łkrwi / Harry Potter and the Half-Blood Prince</div>
+<div style="display:none;" class="title_related"><i class="glyphicon glyphicon-bookmark"></i> Harry Potter i Książę Półkrwi / Harry Potter and the Half-Blood Prince</div>
 <div style="display:none;" class="year_related"><i class="glyphicon glyphicon-align-left"></i> 2009</div>
 <div style="display:none;" class="lang_related"><i class="glyphicon glyphicon-info-sign"></i> Lektor</div>
 </div></a>
@@ -440,6 +451,6 @@ $( "#link_prop_submit" ).click(function() {
 <div>Uwaga! Żaden z prezentowanych materiałów nie jest hostowany na serwerach ekino-tv Serwis udostępnia jedynie informacje o filmach oraz odnośniki do serwisów udostępniających zamieszczone materiały filmowe (mi. Megavideo, Youtube, Video Google, itp.), których użytkownicy potwierdzili, że posiadają prawa autorskie do udostępnianych przez siebie zasobów. Wszelkie roszczenia prawne należy kierować po adresem serwisów publikujących zamieszczone materiały. Administracja serwisu nie ponosi odpowiedzialności za treści i komentarze publikowane przez użytkowników.</div>
 </div>
 </footer>
-<script src="http://ekino-tv.pl/views/js/home.dynamic.js"></script>
+<script src="http://ekino-tv.pl/views/js/home.dynamic.js?1497549366"></script>
 </body>
 </html>

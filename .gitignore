@@ -1,5 +1,6 @@
 release-builds
 node_modules
+coverage
 .idea
 *.js
 !_*.js
